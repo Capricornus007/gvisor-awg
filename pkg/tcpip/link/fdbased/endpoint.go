@@ -44,6 +44,7 @@ import (
 	"fmt"
 	"runtime"
 
+	"golang.org/x/sys/unix"
 	"gvisor.dev/gvisor/pkg/atomicbitops"
 	"gvisor.dev/gvisor/pkg/buffer"
 	"gvisor.dev/gvisor/pkg/rawfile"
@@ -51,7 +52,6 @@ import (
 	"gvisor.dev/gvisor/pkg/tcpip"
 	"gvisor.dev/gvisor/pkg/tcpip/header"
 	"gvisor.dev/gvisor/pkg/tcpip/stack"
-	"golang.org/x/sys/unix"
 )
 
 // linkDispatcher reads packets from the link FD and dispatches them to the
@@ -156,6 +156,10 @@ type endpoint struct {
 	// maxSyscallHeaderBytes has the same meaning as
 	// Options.MaxSyscallHeaderBytes.
 	maxSyscallHeaderBytes uintptr
+
+	// postDispatch, if set, runs on the dispatch goroutine after each
+	// dispatch. Set before Attach.
+	postDispatch func() `state:"nosave"`
 
 	// writevMaxIovs is the maximum number of iovecs that may be passed to
 	// rawfile.NonBlockingWriteIovec, as possibly limited by
@@ -886,9 +890,19 @@ func (e *endpoint) InjectOutbound(dest tcpip.Address, packet *buffer.View) tcpip
 
 // dispatchLoop reads packets from the file descriptor in a loop and dispatches
 // them to the network stack.
+// SetPostDispatch installs a function invoked on the dispatch goroutine after
+// each dispatch, outside stack locks. Must be called before Attach.
+func (e *endpoint) SetPostDispatch(postDispatch func()) bool {
+	e.postDispatch = postDispatch
+	return true
+}
+
 func (e *endpoint) dispatchLoop(inboundDispatcher linkDispatcher) tcpip.Error {
 	for {
 		cont, err := inboundDispatcher.dispatch()
+		if e.postDispatch != nil {
+			e.postDispatch()
+		}
 		if err != nil || !cont {
 			if e.closed != nil {
 				e.closed(err)

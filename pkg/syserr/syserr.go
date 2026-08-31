@@ -20,11 +20,11 @@ package syserr
 import (
 	"fmt"
 
+	"golang.org/x/sys/unix"
 	"gvisor.dev/gvisor/pkg/abi/linux/errno"
 	"gvisor.dev/gvisor/pkg/errors"
 	"gvisor.dev/gvisor/pkg/errors/linuxerr"
 	"gvisor.dev/gvisor/pkg/safecopy"
-	"golang.org/x/sys/unix"
 )
 
 // Error represents an internal error.

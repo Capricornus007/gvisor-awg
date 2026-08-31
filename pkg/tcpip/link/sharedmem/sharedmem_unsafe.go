@@ -18,9 +18,9 @@ import (
 	"fmt"
 	"unsafe"
 
+	"golang.org/x/sys/unix"
 	"gvisor.dev/gvisor/pkg/atomicbitops"
 	"gvisor.dev/gvisor/pkg/memutil"
-	"golang.org/x/sys/unix"
 )
 
 // sharedDataPointer converts the shared data slice into a pointer so that it

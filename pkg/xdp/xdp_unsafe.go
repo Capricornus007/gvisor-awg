@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"unsafe"
 
-	"gvisor.dev/gvisor/pkg/atomicbitops"
 	"golang.org/x/sys/unix"
+	"gvisor.dev/gvisor/pkg/atomicbitops"
 )
 
 func registerUMEM(fd int, reg unix.XDPUmemReg) error {

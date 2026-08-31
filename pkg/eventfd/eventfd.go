@@ -19,10 +19,10 @@ import (
 	"fmt"
 	"io"
 
+	"golang.org/x/sys/unix"
 	"gvisor.dev/gvisor/pkg/hostarch"
 	"gvisor.dev/gvisor/pkg/rawfile"
 	"gvisor.dev/gvisor/pkg/safecopy"
-	"golang.org/x/sys/unix"
 )
 
 const sizeofUint64 = 8

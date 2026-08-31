@@ -20,8 +20,8 @@ package syserr
 import (
 	"fmt"
 
-	"gvisor.dev/gvisor/pkg/abi/linux/errno"
 	"golang.org/x/sys/unix"
+	"gvisor.dev/gvisor/pkg/abi/linux/errno"
 )
 
 const maxErrno = 134

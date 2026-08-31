@@ -18,8 +18,8 @@ import (
 	"bytes"
 	"unsafe"
 
-	"gvisor.dev/gvisor/pkg/syserr"
 	"golang.org/x/sys/unix"
+	"gvisor.dev/gvisor/pkg/syserr"
 )
 
 // UnixDirentMaxSize is the maximum size of unix.Dirent in bytes.

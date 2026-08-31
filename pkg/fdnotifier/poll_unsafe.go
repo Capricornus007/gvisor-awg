@@ -20,8 +20,8 @@ package fdnotifier
 import (
 	"unsafe"
 
-	"gvisor.dev/gvisor/pkg/waiter"
 	"golang.org/x/sys/unix"
+	"gvisor.dev/gvisor/pkg/waiter"
 )
 
 // NonBlockingPoll polls the given FD in non-blocking fashion. It is used just

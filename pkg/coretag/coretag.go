@@ -20,8 +20,8 @@ import (
 	"os"
 	"strconv"
 
-	"gvisor.dev/gvisor/pkg/abi/linux"
 	"golang.org/x/sys/unix"
+	"gvisor.dev/gvisor/pkg/abi/linux"
 )
 
 // Enable core tagging. If this returns with no error, all threads in the

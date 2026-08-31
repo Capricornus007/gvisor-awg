@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"runtime"
 
+	"golang.org/x/sys/unix"
 	"gvisor.dev/gvisor/pkg/errors"
 	"gvisor.dev/gvisor/pkg/errors/linuxerr"
 	"gvisor.dev/gvisor/pkg/sighandling"
-	"golang.org/x/sys/unix"
 )
 
 // SegvError is returned when a safecopy function receives SIGSEGV.

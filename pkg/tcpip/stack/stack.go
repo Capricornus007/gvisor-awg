@@ -27,6 +27,7 @@ import (
 	"sync/atomic"
 	"time"
 
+	"golang.org/x/time/rate"
 	"gvisor.dev/gvisor/pkg/atomicbitops"
 	"gvisor.dev/gvisor/pkg/buffer"
 	"gvisor.dev/gvisor/pkg/log"
@@ -36,7 +37,6 @@ import (
 	"gvisor.dev/gvisor/pkg/tcpip/header"
 	"gvisor.dev/gvisor/pkg/tcpip/ports"
 	"gvisor.dev/gvisor/pkg/waiter"
-	"golang.org/x/time/rate"
 )
 
 const (

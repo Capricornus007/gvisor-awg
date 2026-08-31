@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"os"
 
-	"gvisor.dev/gvisor/pkg/eventfd"
 	"golang.org/x/sys/unix"
+	"gvisor.dev/gvisor/pkg/eventfd"
 )
 
 const (

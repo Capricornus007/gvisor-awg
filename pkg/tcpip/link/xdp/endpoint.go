@@ -21,6 +21,7 @@ package xdp
 import (
 	"fmt"
 
+	"golang.org/x/sys/unix"
 	"gvisor.dev/gvisor/pkg/buffer"
 	"gvisor.dev/gvisor/pkg/rawfile"
 	"gvisor.dev/gvisor/pkg/sync"
@@ -30,7 +31,6 @@ import (
 	"gvisor.dev/gvisor/pkg/tcpip/link/stopfd"
 	"gvisor.dev/gvisor/pkg/tcpip/stack"
 	"gvisor.dev/gvisor/pkg/xdp"
-	"golang.org/x/sys/unix"
 )
 
 // TODO(b/240191988): Turn off GSO, GRO, and LRO. Limit veth MTU to 1500.
